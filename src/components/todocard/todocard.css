@@ -1,0 +1,9 @@
+.todo_Item {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px bisque solid;
+    border-radius: 10px;
+    background-color: white;
+    margin: 5px 0;
+}
