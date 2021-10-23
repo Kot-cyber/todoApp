@@ -8,9 +8,9 @@ const ToDoItems = (props) => {
     if (props.todos.length !== 0) {
         todosCards = props.todos.map((item) => {
                 return (
-                    <div key={item.id} id={item.id} className='todo_Item'>
-                        <input type='checkbox' defaultChecked={Boolean(+item.isDone)}/>
-                        <p>{item.todos_name}</p>
+                    <div key={item.id} id={item.id} className='todo_item'>
+                        <input onChange={() => {props.onIsDoneHandler(item.id)}} type='checkbox' checked={Boolean(+item.isDone)}/>
+                        <p className={Boolean(+item.isDone) === true ? 'checked' : null}>{item.todos_name}</p>
                         <button onClick={() => {props.onDeleteHandler(item.id)}}>Delete</button>
                     </div>)
             }

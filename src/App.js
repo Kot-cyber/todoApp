@@ -14,10 +14,9 @@ class App extends React.Component {
 
 
     componentDidMount() {
-        fetch('http://localhost:3000/getAll',{
+        fetch('http://localhost:3000',{
             method: 'GET'
-        })
-            .then(response => response.text())
+        }).then(response => response.text())
             .then(data => {
                 this.setState({todos : JSON.parse(data)});
             });
@@ -26,12 +25,14 @@ class App extends React.Component {
     };
 
     onAddToDoHandler = () => {
-        fetch('http://localhost:3000/addNewTodo', {
+        fetch('http://localhost:3000', {
             method: 'POST',
             body: JSON.stringify(this.state.addNewTodoName)
         }).then(response => response.text())
             .then(data => {
-                this.setState({todos : JSON.parse(data)})
+                this.setState({todos : JSON.parse(data),
+                    addNewTodoName: ''
+                })
             });
     };
 
@@ -41,26 +42,28 @@ class App extends React.Component {
         }))
     };
 
-    onDeleteHandler = (id) => {
-        console.log(id)
-        fetch('http://localhost:3000/delete', {
+    onDeleteHandler = (itemId) => {
+        fetch(`http://localhost:3000/${itemId}`, {
             method: 'DELETE'
-        })
-        .then( (response) => { console.log(response)})
-        //     // fetch('http://localhost:3000/getAll')
-        //     // .then(response => response.text())
-        //     // .then(data => {
-        //     //     this.setState({todos : JSON.parse(data)});
-        //     // })
-        // })
+        }).then(response => response.text())
+            .then(data => {
+                this.setState({todos : JSON.parse(data)});
+            })
+        }
 
+    onIsDoneHandler = (itemId) => {
+        let changingElement = this.state.todos.find( (elem) => {
+            return elem.id === itemId
+        })
+        fetch(`http://localhost:3000`, {
+            method: 'PATCH',
+            body: JSON.stringify(changingElement)
+        }).then(response => response.text())
+            .then(data => {
+                this.setState({todos : JSON.parse(data)});
+            })
     }
 
-    // fetch('http://localhost:3000/hello')
-    //     .then(response => response.text())
-    //     .then(data => console.log(data[0]));
-    //
-    //
 
     render() {
         return (
@@ -73,10 +76,10 @@ class App extends React.Component {
                        name={'newToDo'}/>
                 <button onClick={this.onAddToDoHandler}
                         name={'newToDo'}>Add ToDo</button>
-                <ToDoItems todos={this.state.todos} onDeleteHandler={this.onDeleteHandler}/>
+                <ToDoItems todos={this.state.todos} onDeleteHandler={this.onDeleteHandler} onIsDoneHandler={this.onIsDoneHandler}/>
             </div>
         );
-    };
+    }
 };
 
 export default App;
