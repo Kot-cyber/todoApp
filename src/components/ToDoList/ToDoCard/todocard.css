@@ -1,0 +1,28 @@
+.todo-list__card {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+    border: 1px bisque solid;
+    border-radius: 10px;
+    background-color: white;
+    margin: 5px;
+    width: 280px;
+    padding: 10px;
+    transition: 1s;
+    min-height: 50px;
+
+}
+.todo-list__card--checked{
+    background-color: lightgreen;
+    opacity: 0.15;
+}
+
+.todo-list__card-name {
+    word-break: break-word;
+}
+.todo-list__card-name--checked {
+    text-decoration: line-through;
+
+}

@@ -1,6 +1,64 @@
-body{
+.todo-App{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    margin: 0 auto;
     background-color: azure;
+    text-align: center;
+    border: 1px solid bisque;
+    border-radius: 10px;
+    max-width: 600px;
+    max-height: 600px;
+    overflow: auto;
 }
-.title{
+/* Hide scrollbar for Chrome, Safari and Opera */
+.todo-App::-webkit-scrollbar {
+    display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.todo-App {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.todo-App__title{
     padding:5px 0;
+}
+
+.add-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    position: sticky;
+    bottom: 0;
+    background-color: azure;
+    padding: 10px;
+    max-width: 400px;
+    min-width: 290px;
+}
+.add-bar__input{
+    border: bisque 2px solid;
+    border-radius: 5px;
+}
+.add-bar__input:focus{
+    outline: none;
+}
+.add-bar__input--invalid{
+    border-color: red;
+}
+
+
+.btn {
+    padding: 10px 15px;
+    background-color: lavenderblush;
+    border: 0 bisque solid;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 430px) {
+    .add-bar {
+        flex-direction: column;
+    }
 }
